@@ -61,7 +61,8 @@ const updateEquipment = async (req, res, next) => {
     var id = req.params.id;
     const data = {
       name: req.body.name,
-      describe: req.body.describe,
+      place: req.body.place,
+      dates: req.body.dates,
       image: req.file.filename,
     };
     let result = await db.query(

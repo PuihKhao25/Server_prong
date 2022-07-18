@@ -70,8 +70,10 @@ const updateMagazine = async (req, res, next) => {
     var id = req.params.id;
     const data = {
       name: req.body.name,
-      describe: req.body.describe,
-      image: req.file.filename,
+      space: req.body.space,
+      area: req.body.area,
+      dates: req.body.dates,
+      
     };
     let result = await db.query(
       "UPDATE magazines SET ? WHERE id=?",
