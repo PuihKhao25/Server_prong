@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "ee540d95-e4f2-440d-b54e-aac68877c3b6",
+		"name": "prong-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21478228"
+	},
+	"item": [
+		{
+			"name": "sign-up",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjYsIm5hbWUiOiJraGFvIiwiZW1haWwiOiJraGFvMTIzQGdtYWlsLmNvbSJ9LCJpYXQiOjE2NTc1ODUyNzcsImV4cCI6MTY1NzY3MTY3N30.YuFQrGbucRySFF1DTy5ilz3hjYM2sRf3iHv3muHtK5M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "user_phone",
+							"value": "0123456789",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-magazine",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwODA3MzN9.IcCabgNxnBcsHsM8MO5PpxE8FRrBwTq6N2YVZSnD4dI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "space",
+							"value": "Gimhae-si",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "abcd",
+							"type": "text"
+						},
+						{
+							"key": "dates",
+							"value": "12-1-2000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/post-magazine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"post-magazine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-magazine",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/consulting/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"consulting",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-magazine",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwODA3MzN9.IcCabgNxnBcsHsM8MO5PpxE8FRrBwTq6N2YVZSnD4dI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "place",
+							"value": "korea",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "capuchino",
+							"type": "text"
+						},
+						{
+							"key": "dates",
+							"value": "12-01-1920",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "caffe bâck",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/magazine/47",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"magazine",
+						"47"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail-consulting/5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwODA3MzN9.IcCabgNxnBcsHsM8MO5PpxE8FRrBwTq6N2YVZSnD4dI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "beautiful",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "singapo",
+							"type": "text"
+						},
+						{
+							"key": "dates",
+							"value": "21-2-2019",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/anh-dep.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/detail-consulting/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"detail-consulting",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
