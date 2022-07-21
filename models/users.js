@@ -27,8 +27,6 @@ var Auth = {
       } else {
         return result({ id: data.insertId, ...auth });
       }
-
-      
     });
   },
 };

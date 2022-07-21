@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // Define Routes
 app.use("/api/auth", require("./routes/authen"));
-app.use("/api/", verifyToken, require("./routes/api"));
+app.use("/api/", require("./routes/api"));
 
 const PORT = 3000;
 app.listen(PORT, () => {

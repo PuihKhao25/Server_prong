@@ -17,6 +17,9 @@ const validateEquipment = () => {
 const validateMagazine = () => {
   return [
     body("name").notEmpty().withMessage("Please enter your name!"),
+    body("space").notEmpty().withMessage("Please enter your space!"),
+    body("area").notEmpty().withMessage("Please enter your area!"),
+    body("dates").notEmpty().withMessage("Please enter your dates!"),
   ];
 };
 const validateAuth = () => {
@@ -45,7 +48,7 @@ const validateAuthLogin = () => {
       .notEmpty()
       .withMessage("Please enter your email!")
       .isEmail()
-      .withMessage("Please enter correct: aaa@abc.com !"),
+      .withMessage("Please enter correct: aaa@abc.com!"),
   ];
 };
 
