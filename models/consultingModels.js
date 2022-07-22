@@ -29,10 +29,10 @@ var consultingModels = {
   },
   
   //update model
-  update: function (id, magazine, result) {
+  update: function (id, consulting, result) {
  
     db.query("UPDATE consultings SET name=?,place=?,image=?,dates=? WHERE id =?",
-    [ magazine.name,magazine.place,magazine.image,magazine.dates,id] ,(err, res) => {
+    [ consulting.name,consulting.place,consulting.image,consulting.dates,id] ,(err, res) => {
       if (err) {
         result(null, err);
       } else {
@@ -52,7 +52,7 @@ var consultingModels = {
     })
   },
 
-  //get findByID magazine
+  //get findByID consulting
   findById: function(id,result){
 
     db.query("SELECT * FROM consultings WHERE id =?",[id],(err,res)=>{

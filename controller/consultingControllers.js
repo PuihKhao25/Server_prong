@@ -34,9 +34,9 @@ const deleteConsulting = async (req, res, next) => {
   const id = req.params.id;
 
   try {
-    consultingModels.findById(id, (err, magazine) => {
+    consultingModels.findById(id, (err, consulting) => {
       if (!err) {
-        if (magazine.length > 0) {
+        if (consulting.length > 0) {
           consultingModels.delete(id, (err, result) => {
             if (err) throw err;
             else {
@@ -112,7 +112,7 @@ const getAllSulting = async (req, res, next) => {
       consultingModels.pagination(
         startingLimit,
         resultPage,
-        (err, magazine) => {
+        (err, consulting) => {
           if (err) throw err;
           let iterator = page - 3 < 1 ? 1 : page - 3;
           let endinglink =
@@ -120,7 +120,7 @@ const getAllSulting = async (req, res, next) => {
           if (endinglink < page + 4) {
             iterator -= page + 4 - numberPage;
           }
-          res.send(magazine);
+          res.send(consulting);
         }
       );
     });

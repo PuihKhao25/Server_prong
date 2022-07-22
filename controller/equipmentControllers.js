@@ -30,9 +30,9 @@ const createEquipment = async (req, res, next) => {
 const deleteEquipment = async (req, res, next) => {
   const id = req.params.id;
   try {
-    equimentModels.findById(id, (err, magazine) => {
+    equimentModels.findById(id, (err, equiment) => {
       if (!err) {
-        if (magazine.length > 0) {
+        if (equiment.length > 0) {
           equimentModels.delete(id, (err, result) => {
             if (err) throw err;
             else {
@@ -62,7 +62,7 @@ const updateEquipment = async (req, res, next) => {
     if (req.body.contructor === Object && Object.keys(req.body).length === 0) {
       res.send(400).send({ success: false, message: "please fill all field" });
     } else {
-      equimentModels.update(id, req.body, (err, consulting) => {
+      equimentModels.update(id, req.body, (err, equiment) => {
         {
           if (err) {
             res.send(err);
@@ -83,10 +83,10 @@ const updateEquipment = async (req, res, next) => {
 const detailEquipment = async (req, res, next) => {
   const id = req.params.id;
   try {
-    equimentModels.findById(id, (err, consulting) => {
+    equimentModels.findById(id, (err, equiment) => {
       if (!err) {
-        if (consulting.length > 0) {
-          res.send(consulting);
+        if (equiment.length > 0) {
+          res.send(equiment);
         } else {
           SendErrorMessageData(res);
         }
@@ -111,7 +111,7 @@ const getAllEquipment = async (req, res, next) => {
         res.send("/?page" + encodeURIComponent(1));
       }
       const startingLimit = (page - 1) * resultPage;
-      equimentModels.pagination(startingLimit, resultPage, (err, magazine) => {
+      equimentModels.pagination(startingLimit, resultPage, (err, equiment) => {
         if (err) throw err;
         let iterator = page - 3 < 1 ? 1 : page - 3;
         let endinglink =
@@ -119,7 +119,7 @@ const getAllEquipment = async (req, res, next) => {
         if (endinglink < page + 4) {
           iterator -= page + 4 - numberPage;
         }
-        res.send(magazine);
+        res.send(equiment);
       });
     });
   } catch (error) {
