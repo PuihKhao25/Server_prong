@@ -1,10 +1,15 @@
-const { validationResult } = require("express-validator");
 const equimentModels = require("../models/equimentModels");
 const cloudinary = require("../middlewares/cloudinary");
+const {
+  SendSuccessMessageCreate,
+  SendErrorMessageSv,
+  SendErrorMessageData,
+  SendErrorMessageCNT,
+} = require("../modules/response");
 
 const createEquipment = async (req, res, next) => {
   if (!req.body.name || !req.body.place || !req.body.dates) {
-    return res.send("Can not emty ");
+    SendErrorMessageCNT(res);
   }
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
@@ -14,13 +19,11 @@ const createEquipment = async (req, res, next) => {
     equimentModels.create(req.body, (err, result) => {
       if (err) throw err;
       else {
-        res.send("create success");
+        SendSuccessMessageCreate(res)
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -37,14 +40,12 @@ const deleteEquipment = async (req, res, next) => {
             }
           });
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData;
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -75,9 +76,7 @@ const updateEquipment = async (req, res, next) => {
       });
     }
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -89,14 +88,12 @@ const detailEquipment = async (req, res, next) => {
         if (consulting.length > 0) {
           res.send(consulting);
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData(res);
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -126,9 +123,7 @@ const getAllEquipment = async (req, res, next) => {
       });
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 

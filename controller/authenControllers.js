@@ -1,12 +1,12 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
-const { sign } = require("jsonwebtoken");
+// const { sign } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const Auth = require("../models/users");
 const {
   SendSuccessMessage,
   SendErrorMessageSv,
-  SendErrorMessage,
 } = require("../modules/response");
 
 class AuthController {
@@ -19,14 +19,14 @@ class AuthController {
             data: result,
           });
         else {
-          return res.status(300).json({
+          return res.status(200).json({
             success: false,
             message: "Get null!",
           });
         }
       });
     } catch (error) {
-      SendErrorMessageSv(error);
+      SendErrorMessageSv(res);
     }
   };
   userLogin = async (req, res) => {
@@ -38,7 +38,6 @@ class AuthController {
       arrayError.forEach((element) => {
         message.push(element.msg);
       });
-     
       return res.status(200).json({
         success: false,
         message: message,
@@ -52,23 +51,25 @@ class AuthController {
             result[0].password
           );
           if (!passwordValid)
-            return res.status(300).json({
+            return res.status(200).json({
               success: false,
               message: "Password does not exist",
             });
-          const accessToken = sign({ user_id: result.id }, "qwe1234", {
-            expiresIn: "1h",
-          });
+          const accessToken = jwt.sign(
+            { user_id: result.id },
+            process.env.ACCESS_TOKEN,
+            { expiresIn: "1h" }
+          );
           SendSuccessMessage(res, { token: accessToken });
         } else {
-          return res.status(300).json({
+          return res.status(200).json({
             success: false,
             message: "Email does not exist",
           });
         }
       });
     } catch (error) {
-      SendErrorMessageSv(error);
+      SendErrorMessageSv(res);
     }
   };
 
@@ -94,21 +95,20 @@ class AuthController {
           req.body.password = hasPassword;
           const createUser = await Auth.create(req.body, (result) => {
             if (result != null) {
-              const accessToken = jwt.sign({ user_id: result.id });
               return res.status(200).json({
                 success: true,
                 message: "Sigup successfully",
               });
             } else {
               return res
-                .status(300)
+                .status(200)
                 .json({ success: false, message: "Sigup failed" });
             }
           });
         }
       });
     } catch (error) {
-      SendErrorMessageSv(error);
+      SendErrorMessageSv(res);
     }
   };
 }

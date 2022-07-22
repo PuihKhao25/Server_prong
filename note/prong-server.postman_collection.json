@@ -101,11 +101,11 @@
 		{
 			"name": "post-magazine",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwODA3MzN9.IcCabgNxnBcsHsM8MO5PpxE8FRrBwTq6N2YVZSnD4dI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgzMzEzMTksImV4cCI6MTY1ODMzNDkxOX0.qItDesBw0hrqNtfH7JkTY34qV0teT7wrHPKlOaz4RZY",
 						"type": "text"
 					}
 				],
@@ -114,28 +114,28 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "space",
-							"value": "Gimhae-si",
-							"type": "text"
-						},
-						{
-							"key": "area",
 							"value": "abcd",
 							"type": "text"
 						},
 						{
+							"key": "space",
+							"value": "Gimhae-sid",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "korea",
+							"type": "text"
+						},
+						{
 							"key": "dates",
-							"value": "12-1-2000",
+							"value": "2020-11-09",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/post-magazine",
+					"raw": "http://localhost:3000/api/magazine/53",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -143,7 +143,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"post-magazine"
+						"magazine",
+						"53"
 					]
 				}
 			},
@@ -153,9 +154,25 @@
 			"name": "delete-magazine",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTg0NTIwMzAsImV4cCI6MTY1ODQ1NTYzMH0.yEA8qEX_s8hBJMLweilN2cZ33C12avclHl39Ig7fD-k",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTg0NTIwMzAsImV4cCI6MTY1ODQ1NTYzMH0.yEA8qEX_s8hBJMLweilN2cZ33C12avclHl39Ig7fD-k",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
-					"raw": "http://localhost:3000/api/admin/consulting/5",
+					"raw": "http://localhost:3000/api/magazine/499",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,9 +180,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"admin",
-						"consulting",
-						"5"
+						"magazine",
+						"499"
 					]
 				}
 			},
@@ -186,7 +202,7 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "place",
+							"key": "space",
 							"value": "korea",
 							"type": "text"
 						},
@@ -197,12 +213,12 @@
 						},
 						{
 							"key": "dates",
-							"value": "12-01-1920",
+							"value": "2020-11-09",
 							"type": "text"
 						},
 						{
 							"key": "name",
-							"value": "caffe bâck",
+							"value": "caffe abc",
 							"type": "text"
 						}
 					]
@@ -243,27 +259,31 @@
 						{
 							"key": "name",
 							"value": "beautiful",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "place",
 							"value": "singapo",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "dates",
 							"value": "21-2-2019",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/C:/Users/pkhao/OneDrive/Pictures/anh-dep.jpg"
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/anh-dep.jpg",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/detail-consulting/5",
+					"raw": "http://localhost:3000/api/detail-magazine/46",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -271,8 +291,333 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"detail-consulting",
-						"5"
+						"detail-magazine",
+						"46"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-consulting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "khao",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "Gialai",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/chim o.jpg"
+						},
+						{
+							"key": "dates",
+							"value": "2012-09-09",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/post-consulting",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"post-consulting"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-consulting",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ni",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "viétnam",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/h.jpg"
+						},
+						{
+							"key": "dates",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/consulting/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"consulting",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-consulting?page=2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTc2ODMyODF9.Hs-c-YtHkBFnUIAscp_H7mNl40PZx9tWXUVeG5frHW0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Prong Interior",
+							"type": "text"
+						},
+						{
+							"key": "introduce",
+							"value": "saigon",
+							"type": "text"
+						},
+						{
+							"key": "url_image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/test/doctor2.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/list-consulting?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"list-consulting"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-equipment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTg0NTIwMzAsImV4cCI6MTY1ODQ1NTYzMH0.yEA8qEX_s8hBJMLweilN2cZ33C12avclHl39Ig7fD-k",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/list-equipment?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"list-equipment"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail-equipment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/detail-equipment/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"detail-equipment",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-equipment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "book",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "korea",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/ni.jpg"
+						},
+						{
+							"key": "dates",
+							"value": "2022-01-02",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/equipment/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"equipment",
+						"3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "place",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "image",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "dates",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-equipment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTg0NTIwMzAsImV4cCI6MTY1ODQ1NTYzMH0.yEA8qEX_s8hBJMLweilN2cZ33C12avclHl39Ig7fD-k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "jsonpostd",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "quynhonf",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/pkhao/OneDrive/Pictures/ni.jpg"
+						},
+						{
+							"key": "dates",
+							"value": "2021-09-12",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/post-equipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"post-equipment"
 					]
 				}
 			},

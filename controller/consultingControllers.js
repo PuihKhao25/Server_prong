@@ -1,10 +1,15 @@
-
 const cloudinary = require("../middlewares/cloudinary");
 const consultingModels = require("../models/consultingModels");
+const {
+  SendSuccessMessageCreate,
+  SendErrorMessageSv,
+  SendErrorMessageData,
+  SendErrorMessageCNT,
+} = require("../modules/response");
 
 const createConsulting = async (req, res, next) => {
-  if(!req.body.name || !req.body.place || !req.body.dates){
-    return res.send('Can not emty ')
+  if (!req.body.name || !req.body.place || !req.body.dates) {
+    SendErrorMessageCNT(res)
   }
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
@@ -16,18 +21,12 @@ const createConsulting = async (req, res, next) => {
         if (err) {
           res.send(err);
         } else {
-          res.json({
-            status: true,
-            message: "Create Success",
-            datas: consulting.insertId,
-          });
+          SendSuccessMessageCreate(res)
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -45,21 +44,19 @@ const deleteConsulting = async (req, res, next) => {
             }
           });
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData(res);
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
 const updateConsulting = async (req, res, next) => {
   const id = req.params.id;
-  if(!req.body.name || !req.body.place || !req.body.dates){
-    return res.send('Can not emty ')
+  if (!req.body.name || !req.body.place || !req.body.dates) {
+    SendErrorMessageCNT(res)
   }
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
@@ -77,9 +74,7 @@ const updateConsulting = async (req, res, next) => {
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -91,14 +86,12 @@ const detailSulting = async (req, res, next) => {
         if (consulting.length > 0) {
           res.send(consulting);
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData(res);
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -132,9 +125,7 @@ const getAllSulting = async (req, res, next) => {
       );
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error server",
-    });
+    SendErrorMessageSv(res);
   }
 };
 

@@ -1,6 +1,10 @@
-const db = require("../config/connectDB");
 const magazineModels = require("../models/magazineModels");
 const { validationResult } = require("express-validator");
+const {
+  SendSuccessMessageCreate,
+  SendErrorMessageSv,
+  SendErrorMessageData,
+} = require("../modules/response");
 
 // Create magazine
 const createMagazine = async (req, res, next) => {
@@ -23,19 +27,13 @@ const createMagazine = async (req, res, next) => {
           if (err) {
             res.send(err);
           } else {
-            res.json({
-              status: true,
-              message: "Create Success",
-              datas: magazine.insertId,
-            });
+            SendSuccessMessageCreate(res)
           }
         }
       });
     }
   } catch (error) {
-    res.status(500).json({
-      message: "Server error",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -53,14 +51,13 @@ const deleteMagazine = async (req, res, next) => {
             }
           });
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData(res);
+          // return res.status(400).json({message: "false"})
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Server error",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -91,9 +88,7 @@ const updateMagazine = async (req, res, next) => {
       });
     }
   } catch (error) {
-    res.status(500).json({
-      message: "Server error",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -124,9 +119,7 @@ const getAllMagazine = async (req, res, next) => {
       });
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Server error",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
@@ -140,14 +133,12 @@ const detailMagazine = async (req, res, next) => {
         if (magazine.length > 0) {
           res.send(magazine);
         } else {
-          res.send("Not found data 2000");
+          SendErrorMessageData(res);
         }
       }
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Server error",
-    });
+    SendErrorMessageSv(res);
   }
 };
 
