@@ -1,8 +1,6 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
-// const { sign } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
-
 const Auth = require("../models/users");
 const {
   SendSuccessMessage,
@@ -15,7 +13,7 @@ class AuthController {
       await Auth.find(function (result) {
         if (result != null)
           return res.status(200).json({
-            success: true,
+            success: "001",
             data: result,
           });
         else {
@@ -29,7 +27,8 @@ class AuthController {
       SendErrorMessageSv(res);
     }
   };
-  userLogin = async (req, res) => {
+
+  postLogin = async (req, res) => {
     const { email, password } = req.body;
     var errors = validationResult(req);
     var arrayError = errors.array();
@@ -39,21 +38,18 @@ class AuthController {
         message.push(element.msg);
       });
       return res.status(200).json({
-        success: false,
+        success: "002",
         message: message,
       });
     }
     try {
       await Auth.findById(email, async function (result) {
         if (result != null) {
-          const passwordValid = await bcrypt.compare(
-            password,
-            result[0].password
-          );
+          const passwordValid = await bcrypt.compare(password,result[0].password);
           if (!passwordValid)
             return res.status(200).json({
-              success: false,
-              message: "Password does not exist",
+              success: "002",
+              message: "Wrong password",
             });
           const accessToken = jwt.sign(
             { user_id: result.id },
@@ -63,8 +59,8 @@ class AuthController {
           SendSuccessMessage(res, { token: accessToken });
         } else {
           return res.status(200).json({
-            success: false,
-            message: "Email does not exist",
+            success: "002",
+            message: "Wrong email",
           });
         }
       });
@@ -73,17 +69,17 @@ class AuthController {
     }
   };
 
-  userSignup = async (req, res) => {
+  postRegister = async (req, res) => {
     const { name, email, password } = req.body;
-    var err = validationResult(req);
-    var arrayError = err.array();
+    const err = validationResult(req);
+    const arrayError = err.array();
     if (arrayError.length > 0) {
       var message = [];
       arrayError.forEach((element) => {
         message.push(element.msg);
       });
       return res.status(200).json({
-        success: false,
+        success: "002",
         message: message,
       });
     }
@@ -96,13 +92,13 @@ class AuthController {
           const createUser = await Auth.create(req.body, (result) => {
             if (result != null) {
               return res.status(200).json({
-                success: true,
-                message: "Sigup successfully",
+                success: "001",
+                message: "Sign up successfully",
               });
             } else {
               return res
                 .status(200)
-                .json({ success: false, message: "Sigup failed" });
+                .json({ success: "002", message: "Sign up failed" });
             }
           });
         }

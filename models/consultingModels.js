@@ -1,8 +1,6 @@
 var db = require("../config/connectDB");
 
 var consultingModels = {
-
-  // create model
   create: function (consulting, result) {
     db.query("INSERT INTO consultings SET ?", consulting, (err, res) => {
       if (err) {
@@ -12,8 +10,6 @@ var consultingModels = {
       }
     });
   },
-
-  // delete model
   delete: function (id, result) {
     db.query(
       "UPDATE consultings SET delete_flg=? WHERE id = ?",
@@ -27,10 +23,7 @@ var consultingModels = {
       }
     );
   },
-  
-  //update model
   update: function (id, consulting, result) {
- 
     db.query("UPDATE consultings SET name=?,place=?,image=?,dates=? WHERE id =?",
     [ consulting.name,consulting.place,consulting.image,consulting.dates,id] ,(err, res) => {
       if (err) {
@@ -40,8 +33,6 @@ var consultingModels = {
       }
     });
   },
-
-  // get list model
   list: function(result){
     db.query("SELECT * FROM consultings ", (err,res)=>{
       if(err){
@@ -51,10 +42,7 @@ var consultingModels = {
       }
     })
   },
-
-  //get findByID consulting
   findById: function(id,result){
-
     db.query("SELECT * FROM consultings WHERE id =?",[id],(err,res)=>{
       if(err){
         result (null,err)
@@ -63,10 +51,8 @@ var consultingModels = {
       }
     })
   },
-
-  // get Pagination list dat
-  pagination: function(startingLimit,resultPage ,result){
-    db.query(`SELECT * FROM consultings LIMIT ${startingLimit},${resultPage}`,(err,res)=>{
+  pagination: function(limit,offset ,result){
+    db.query(`select * from consultings LIMIT ${limit} OFFSET ${offset}`,(err,res)=>{
       if(err){
         result (null,err)
       }else{
@@ -74,7 +60,7 @@ var consultingModels = {
       }
     })
   }
-
+  
 };
 
 

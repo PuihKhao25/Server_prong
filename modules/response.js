@@ -2,7 +2,6 @@
 const SendSuccessMessage = (res, data) => {
   return res.status(200).send({
     success: 001,
-    message: "Success",
     data: data,
   });
 };

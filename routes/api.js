@@ -1,89 +1,48 @@
 const express = require("express");
 const router = express.Router();
-
 const validate = require("../validate/validate");
-
 const magazineController = require("../controller/magazineControllers");
-const consultingController = require("../controller/consultingControllers");
+const consultController = require("../controller/consultingControllers");
 const equipmentController = require("../controller/equipmentControllers");
 const upload = require("../middlewares/upload");
 const verifyToken = require("../middlewares/verifyToken");
 
 // create magazine api
-router.post(
-  "/post-magazine",
-  verifyToken,
-  validate.validateMagazine(),
-  magazineController.createMagazine
-);
+router.post("/magazines",verifyToken,validate.validateMagazine(),magazineController.postMagazines);
 // delete magazine api
-router.delete("/magazine/:id", verifyToken, magazineController.deleteMagazine);
+router.delete("/magazines/:id", 
+verifyToken, 
+magazineController.deleteMagazines);
 // // update magazine api
-router.put(
-  "/magazine/:id",
-  verifyToken,
-  validate.validateMagazine(),
-  magazineController.updateMagazine
-);
+router.put("/magazines/:id",verifyToken,validate.validateMagazine(),magazineController.putMagazines);
 // // get detail magazine api
-router.get("/detail-magazine/:id", magazineController.detailMagazine);
+router.get("/magazines/:id", magazineController.getMagazines);
 // // get list magazine api
-router.get("/list-magazine", magazineController.getAllMagazine);
+router.get("/magazines", magazineController.getAllMagazines);
 // //-- end magazine api----//
 
 // create consulting api
-router.post(
-  "/post-consulting",
-  verifyToken,
-  validate.validateConsult(),
-  upload.single("image"),
-  consultingController.createConsulting
-);
+router.post("/consultings",verifyToken,validate.validateConsult(),upload.single("image"),consultController.postConsults);
 // delete consulting api
-router.delete(
-  "/consulting/:id",
-  verifyToken,
-  consultingController.deleteConsulting
-);
+router.delete("/consultings/:id",verifyToken,consultController.deleteConsults);
 // update consuslting api
-router.put(
-  "/consulting/:id",
-  verifyToken,
-  validate.validateConsult(),
-  upload.single("image"),
-  consultingController.updateConsulting
-);
+router.put("/consultings/:id",verifyToken,validate.validateConsult(),upload.single("image"),consultController.putConsults);
 // get detail consulting api
-router.get("/detail-consulting/:id", consultingController.detailSulting);
+router.get("/consultings/:id", consultController.getConsults);
 // get list consulting api
-router.get("/list-consulting", consultingController.getAllSulting);
+router.get("/consultings", consultController.getAllConsults);
 //-- end consulting api----//
 
 // create equipment api
-router.post(
-  "/post-equipment",
-  verifyToken,
-  upload.single("image"),
-  equipmentController.createEquipment
-);
+router.post("/equipment",verifyToken,upload.single("image"),equipmentController.postEquipment);
 // get delete consulting api
-router.delete(
-  "/equipment/:id",
-  verifyToken,
-  equipmentController.deleteEquipment
-);
+router.delete("/equipment/:id",verifyToken,equipmentController.deleteEquipment);
 // get update consulting api
-router.put(
-  "/equipment/:id",
-  verifyToken,
-  validate.validateConsult(),
-  upload.single("image"),
-  equipmentController.updateEquipment
-);
+router.put("/equipment/:id",verifyToken,validate.validateConsult(),upload.single("image"),equipmentController.putEquipment);
 // get detail consulting api
-router.get("/detail-equipment/:id", equipmentController.detailEquipment);
+router.get("/equipment/:id", equipmentController.getEquipment);
 // get list consulting api
-router.get("/list-equipment", equipmentController.getAllEquipment);
+router.get("/equipment", equipmentController.getAllEquipment);
 //-- end equipment api----//
 
 module.exports = router;
