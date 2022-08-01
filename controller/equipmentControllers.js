@@ -2,12 +2,14 @@ const equimentModels = require("../models/equimentModels");
 const {
   SendErrorMessageSv,
   SendErrorMessageData,
+  SendErrorMessageCNT
 } = require("../modules/response");
+const cloudinary = require("../middlewares/cloudinary")
 
 class equipmentController {
   postEquipment = async (req, res) => {
     if (!req.body.name || !req.body.place || !req.body.dates) {
-      return res.send("Can not emty ");
+      return SendErrorMessageCNT(res)
     }
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
@@ -63,7 +65,7 @@ class equipmentController {
   putEquipment = async (req, res) => {
     const id = req.params.id;
     if (!req.body.name || !req.body.place || !req.body.dates) {
-      return res.send("Can not emty ");
+      return SendErrorMessageCNT(res)
     }
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);

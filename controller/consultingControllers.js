@@ -3,16 +3,14 @@ const { validationResult } = require("express-validator");
 const {
   SendErrorMessageSv,
   SendErrorMessageData,
+  SendErrorMessageCNT
 } = require("../modules/response");
-const db = require("../config/connectDB");
+const cloudinary = require("../middlewares/cloudinary")
 
 class consultController {
   postConsults = async (req, res) => {
     if (!req.body.name || !req.body.place || !req.body.dates) {
-      return res.status(200).json({
-        success: "002",
-        message: "Can not emty",
-      });
+      return SendErrorMessageCNT(res)
     }
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
@@ -68,10 +66,7 @@ class consultController {
   putConsults = async (req, res) => {
     const id = req.params.id;
     if (!req.body.name || !req.body.place || !req.body.dates) {
-      return res.status(200).json({
-        success: "002",
-        message: "Can not emty",
-      });
+      return SendErrorMessageCNT(res)
     }
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
